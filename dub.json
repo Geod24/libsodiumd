@@ -1,0 +1,9 @@
+{
+	"name": "libsodiumd",
+	"description": "D binding for libsodium",
+	"license": "ISC",
+    "libs": [ "sodium" ],
+	"authors": [
+		"Mathias Lang"
+	]
+}
