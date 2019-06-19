@@ -1,0 +1,45 @@
+language: d
+
+# Trusty is Travis' default but reached EOL 2019-04-30
+dist: xenial
+
+# Poor man SemVer matching
+branches:
+  only:
+    - /upstream-\S+/
+    - /^v\d+\.(x|[\d]+)\.(x|[\d]+)([-|\+](\S+))?$/
+
+os:
+  - linux
+  - osx
+
+# The libsodium provided in this package is rather ancient,
+# but it will do as the API almost never changes
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - libsodium-dev
+
+# Install libsodium on Mac
+before_install:
+  - if [ "$TRAVIS_OS_NAME" = "osx" ];   then brew install libsodium; fi
+
+d:
+  - dmd
+  - ldc
+  - dmd-2.085.1
+  - ldc-1.14.0
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gdc-9
+            - libsodium-dev
+      env: DC=gdc-9
