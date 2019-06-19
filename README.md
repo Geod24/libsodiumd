@@ -1,5 +1,8 @@
 ## Libsodiumd: D bindings for libsodium
 
+[![Build Status](https://travis-ci.com/geod24/libsodiumd.svg?branch=upstream-1.0.17)](https://travis-ci.com/geod24/libsodiumd)
+[![DUB Package](https://img.shields.io/dub/v/libsodiumd.svg)](https://code.dlang.org/packages/libsodiumd)
+
 Currently supported version: v1.0.17 (released 2019-01-07)
 
 Those bindings are simple translation from C to D.
