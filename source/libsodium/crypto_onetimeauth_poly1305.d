@@ -14,7 +14,7 @@ import libsodium.export_;
 
 extern (C):
 
-struct crypto_onetimeauth_poly1305_state
+align(16) struct crypto_onetimeauth_poly1305_state
 {
     ubyte[256] opaque;
 }
