@@ -22,7 +22,7 @@ The bindings were generated with the following procedure:
 - Checkout the required version
 - Translate C headers to D modules:
 ```sh
-find src/libsodium/include/sodium -depth 1 -name "*.h" | xargs -I F $DSTEP -Isrc/libsodium/include/sodium/ F -o $LIBSODIUMD/source/libsodium/$(basename F | cut -d'.' -f1).d
+find src/libsodium/include/sodium -maxdepth 1 -name "*.h" | xargs -I F $DSTEP -Isrc/libsodium/include/sodium/ F -o $LIBSODIUMD/source/libsodium/$(basename F | cut -d'.' -f1).d
 ```
   With `$DSTEP` and `$LIBSODIUMD` being the dstep binary and path to this git repository, respectively.
 
