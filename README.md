@@ -22,40 +22,6 @@ The bindings were generated with the following procedure:
 - Checkout the required version
 - Translate C headers to D modules:
 ```sh
-find src/libsodium/include/sodium -maxdepth 1 -name "*.h" | xargs -I F $DSTEP -Isrc/libsodium/include/sodium/ F -o $LIBSODIUMD/source/libsodium/$(basename F | cut -d'.' -f1).d
+./generate.sh $DSTEP $LIPSODIUM_REPO $LIBSODIUMD_PACKAGE
 ```
-  With `$DSTEP` and `$LIBSODIUMD` being the dstep binary and path to this git repository, respectively.
-
-Then, a few manual adjustment were made:
-- `mv source/libsodium/export.d source/libsodium/export_.d` as it conflicts with a D keyword
-- Module documentation, module name, and standard import were added:
-```sh
-for file in $(find source/libsodium -name "*.d")
-do
-echo "\
-/*******************************************************************************
-
-    D language bindings for libsodium's $(basename $file | cut -d'.' -f1).h
-
-    License: ISC (see LICENSE.txt)
-
-*******************************************************************************/
-
-module libsodium.$(basename $file | cut -d'.' -f1);
-
-@nogc nothrow:
-
-import libsodium.export_;
-" | cat - $file > $file.tmp && mv $file.tmp $file
-done
-```
-- Turn `ULL` constants into `UL`:
-```sh
-for file in $(find source/libsodium -name "*.d")
-do
-sed -i '' -e 's/([[:digit:]])ULL/\1UL/g' $file
-done
-```
-
-- Try to compile, add missing imports and fix `dstep` mishaps (e.g. some extra `_` are added)
-- Generate `source/libsodium/package_.d`
+  With `$DSTEP`, `$LIPSODIUM_REPO` and `$LIBSODIUMD_PACKAGE` being the dstep binary and path to git repositories, respectively.
