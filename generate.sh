@@ -8,11 +8,11 @@ LIBSODIUMD=$3/source/libsodium
 export LIBSODIUMD
 
 # Remove all previous files
-rm -rf ${LIBSODIUMD}/*
+rm -rf ${LIBSODIUMD}/*.d
 
 # Generate D files from C headers
 find "$SRCDIR/src/libsodium/include/sodium" -maxdepth 1 -xtype f -name '*.h' \
-    -exec ${DSTEP} '{}' \; \
+    -exec ${DSTEP} --collision-action=ignore --skip randombytes_salsa20_implementation '{}' \; \
     -exec sh -c 'mv $(dirname "$0")/*.d ${LIBSODIUMD}' {}  \;
 
 mv ${LIBSODIUMD}/export.d ${LIBSODIUMD}/export_.d # as it conflicts with a D keyword
