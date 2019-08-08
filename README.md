@@ -1,6 +1,6 @@
 ## Libsodiumd: D bindings for libsodium
 
-Currently supported version: v1.0.17 (released 2019-01-07)
+Currently supported version: v1.0.18 (released 2019-05-31)
 
 Those bindings are simple translation from C to D.
 They are simple, stupid, unnanotated - minimal modification has been applied
