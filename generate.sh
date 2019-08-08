@@ -39,10 +39,10 @@ module libsodium.$(basename $file | cut -d'.' -f1);
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 " | cat - $file > $file.tmp && mv $file.tmp $file
 done
 
 # Generate root package file
 echo "/// D language bindings for libsodium\n///\n/// License: ISC (see LICENSE.txt)\nmodule libsodium;\n" >> ${LIBSODIUMD}/package.d
-grep -re 'module ' --no-filename --include='*.d' ${LIBSODIUMD} | sed 's/module/public import/' | grep -v '#public import libsodium.sodium;' | sort >> ${LIBSODIUMD}/package.d
+grep -r 'module ' --no-filename --include='*.d' ${LIBSODIUMD} | sed 's/module/public import/' | sort >> ${LIBSODIUMD}/package.d
