@@ -3,7 +3,6 @@
 /// License: ISC (see LICENSE.txt)
 module libsodium;
 
-public import libsodium;
 public import libsodium.core;
 public import libsodium.crypto_aead_aes256gcm;
 public import libsodium.crypto_aead_chacha20poly1305;

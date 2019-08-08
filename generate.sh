@@ -54,5 +54,7 @@ import libsodium;
 done
 
 # Generate root package file
+grep -r 'module ' --no-filename --include='*.d' ${LIBSODIUMD} | sed 's/module/public import/' | sort >> ${LIBSODIUMD}/package.d.tmp
 echo "/// D language bindings for libsodium\n///\n/// License: ISC (see LICENSE.txt)\nmodule libsodium;\n" >> ${LIBSODIUMD}/package.d
-grep -r 'module ' --no-filename --include='*.d' ${LIBSODIUMD} | sed 's/module/public import/' | sort >> ${LIBSODIUMD}/package.d
+cat ${LIBSODIUMD}/package.d.tmp >> ${LIBSODIUMD}/package.d
+rm ${LIBSODIUMD}/package.d.tmp
