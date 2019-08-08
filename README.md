@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/geod24/libsodiumd.svg?branch=upstream-1.0.17)](https://travis-ci.com/geod24/libsodiumd)
 [![DUB Package](https://img.shields.io/dub/v/libsodiumd.svg)](https://code.dlang.org/packages/libsodiumd)
 
-Currently supported version: v1.0.17 (released 2019-01-07)
+Currently supported version: v1.0.18 (released 2019-05-31)
 
 Those bindings are simple translation from C to D.
 They are simple, stupid, unnanotated - minimal modification has been applied
@@ -25,9 +25,11 @@ The bindings were generated with the following procedure:
 - Checkout the required version
 - Translate C headers to D modules:
 ```sh
-find src/libsodium/include/sodium -depth 1 -name "*.h" | xargs -I F $DSTEP -Isrc/libsodium/include/sodium/ F -o $LIBSODIUMD/source/libsodium/$(basename F | cut -d'.' -f1).d
+find "$LIBSODIUM_REPO/src/libsodium/include/sodium" -maxdepth 1 -xtype f -name '*.h' \
+    -exec ${DSTEP} --collision-action=ignore --skip randombytes_salsa20_implementation '{}' \; \
+    -exec sh -c 'mv $(dirname "$0")/*.d ${LIBSODIUMD_PACKAGE}' {}  \;
 ```
-  With `$DSTEP` and `$LIBSODIUMD` being the dstep binary and path to this git repository, respectively.
+  With `$DSTEP`, `$LIBSODIUM_REPO` and `$LIBSODIUMD_PACKAGE` being the dstep binary and path to git repositories, respectively.
 
 Then, a few manual adjustment were made:
 - `mv source/libsodium/export.d source/libsodium/export_.d` as it conflicts with a D keyword
@@ -60,5 +62,5 @@ sed -i '' -e 's/([[:digit:]])ULL/\1UL/g' $file
 done
 ```
 
-- Try to compile, add missing imports and fix `dstep` mishaps (e.g. some extra `_` are added)
+- Try to compile and add missing imports
 - Generate `source/libsodium/package_.d`
