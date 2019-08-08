@@ -10,7 +10,7 @@ module libsodium.randombytes;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -51,3 +51,4 @@ const(char)* randombytes_implementation_name ();
 /* -- NaCl compatibility interface -- */
 
 void randombytes (ubyte* buf, const ulong buf_len);
+

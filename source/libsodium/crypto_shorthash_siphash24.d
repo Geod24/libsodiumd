@@ -10,7 +10,7 @@ module libsodium.crypto_shorthash_siphash24;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -41,3 +41,4 @@ int crypto_shorthash_siphashx24 (
     const(ubyte)* in_,
     ulong inlen,
     const(ubyte)* k);
+

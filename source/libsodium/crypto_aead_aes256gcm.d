@@ -10,7 +10,7 @@ module libsodium.crypto_aead_aes256gcm;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -48,8 +48,7 @@ size_t crypto_aead_aes256gcm_npubbytes ();
 enum crypto_aead_aes256gcm_ABYTES = 16U;
 size_t crypto_aead_aes256gcm_abytes ();
 
-enum crypto_aead_aes256gcm_MESSAGEBYTES_MAX =
-    SODIUM_MIN(SODIUM_SIZE_MAX - crypto_aead_aes256gcm_ABYTES, 16UL * ((1UL << 32) - 2UL));
+enum crypto_aead_aes256gcm_MESSAGEBYTES_MAX = SODIUM_MIN(SODIUM_SIZE_MAX - crypto_aead_aes256gcm_ABYTES, 16UL * ((1UL << 32) - 2UL));
 size_t crypto_aead_aes256gcm_messagebytes_max ();
 
 struct crypto_aead_aes256gcm_state_
@@ -158,3 +157,4 @@ int crypto_aead_aes256gcm_decrypt_detached_afternm (
     const(crypto_aead_aes256gcm_state)* ctx_);
 
 void crypto_aead_aes256gcm_keygen (ref ubyte[crypto_aead_aes256gcm_KEYBYTES] k);
+

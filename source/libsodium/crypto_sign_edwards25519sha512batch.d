@@ -10,7 +10,7 @@ module libsodium.crypto_sign_edwards25519sha512batch;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -45,3 +45,4 @@ int crypto_sign_edwards25519sha512batch_open (
     const(ubyte)* pk);
 
 int crypto_sign_edwards25519sha512batch_keypair (ubyte* pk, ubyte* sk);
+

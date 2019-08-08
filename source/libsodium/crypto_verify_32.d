@@ -10,7 +10,7 @@ module libsodium.crypto_verify_32;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -18,3 +18,4 @@ enum crypto_verify_32_BYTES = 32U;
 size_t crypto_verify_32_bytes ();
 
 int crypto_verify_32 (const(ubyte)* x, const(ubyte)* y);
+

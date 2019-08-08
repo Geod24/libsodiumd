@@ -10,7 +10,7 @@ module libsodium.crypto_kdf_blake2b;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -32,3 +32,4 @@ int crypto_kdf_blake2b_derive_from_key (
     ulong subkey_id,
     ref const(char)[crypto_kdf_blake2b_CONTEXTBYTES] ctx,
     ref const(ubyte)[crypto_kdf_blake2b_KEYBYTES] key);
+

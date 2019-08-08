@@ -10,8 +10,7 @@ module libsodium.crypto_secretbox_xchacha20poly1305;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_stream_xchacha20;
+import libsodium;
 
 extern (C):
 
@@ -56,3 +55,4 @@ int crypto_secretbox_xchacha20poly1305_open_detached (
     ulong clen,
     const(ubyte)* n,
     const(ubyte)* k);
+

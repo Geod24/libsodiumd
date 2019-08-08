@@ -10,7 +10,7 @@ module libsodium.runtime;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -39,3 +39,4 @@ int sodium_runtime_has_rdrand ();
 /* ------------------------------------------------------------------------- */
 
 int _sodium_runtime_get_cpu_features ();
+

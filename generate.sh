@@ -11,6 +11,10 @@ export LIBSODIUMD
 rm -rf ${LIBSODIUMD}/*.d
 
 # Generate D files from C headers
+#
+# Details:
+#   it ignores typedefs vs. structs collisions
+#   disabled randombytes_salsa20_implementation - this backward compatibility symbol causes wrong codegen
 find "$SRCDIR/src/libsodium/include/sodium" -maxdepth 1 -xtype f -name '*.h' \
     -exec ${DSTEP} --collision-action=ignore --skip randombytes_salsa20_implementation '{}' \; \
     -exec sh -c 'mv $(dirname "$0")/*.d ${LIBSODIUMD}' {}  \;

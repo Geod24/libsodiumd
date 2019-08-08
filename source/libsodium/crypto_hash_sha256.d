@@ -10,7 +10,7 @@ module libsodium.crypto_hash_sha256;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -43,3 +43,4 @@ int crypto_hash_sha256_update (
     ulong inlen);
 
 int crypto_hash_sha256_final (crypto_hash_sha256_state* state, ubyte* out_);
+

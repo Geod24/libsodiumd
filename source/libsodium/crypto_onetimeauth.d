@@ -10,8 +10,7 @@ module libsodium.crypto_onetimeauth;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_onetimeauth_poly1305;
+import libsodium;
 
 extern (C):
 
@@ -52,3 +51,4 @@ int crypto_onetimeauth_update (
 int crypto_onetimeauth_final (crypto_onetimeauth_state* state, ubyte* out_);
 
 void crypto_onetimeauth_keygen (ref ubyte[crypto_onetimeauth_KEYBYTES] k);
+

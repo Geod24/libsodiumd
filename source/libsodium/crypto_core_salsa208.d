@@ -10,7 +10,7 @@ module libsodium.crypto_core_salsa208;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -31,3 +31,4 @@ int crypto_core_salsa208 (
     const(ubyte)* in_,
     const(ubyte)* k,
     const(ubyte)* c);
+

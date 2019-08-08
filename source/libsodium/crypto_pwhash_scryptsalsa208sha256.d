@@ -10,7 +10,8 @@ module libsodium.crypto_pwhash_scryptsalsa208sha256;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
+
 import core.stdc.stdint;
 
 extern (C):
@@ -96,3 +97,4 @@ int crypto_pwhash_scryptsalsa208sha256_str_needs_rehash (
     ref const(char)[crypto_pwhash_scryptsalsa208sha256_STRBYTES] str,
     ulong opslimit,
     size_t memlimit);
+

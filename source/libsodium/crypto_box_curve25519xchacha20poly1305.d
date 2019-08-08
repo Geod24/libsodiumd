@@ -10,8 +10,7 @@ module libsodium.crypto_box_curve25519xchacha20poly1305;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_stream_xchacha20;
+import libsodium;
 
 extern (C):
 
@@ -132,3 +131,4 @@ int crypto_box_curve25519xchacha20poly1305_seal_open (
     ulong clen,
     const(ubyte)* pk,
     const(ubyte)* sk);
+

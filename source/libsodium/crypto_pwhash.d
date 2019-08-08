@@ -10,9 +10,7 @@ module libsodium.crypto_pwhash;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_pwhash_argon2i;
-import libsodium.crypto_pwhash_argon2id;
+import libsodium;
 
 extern (C):
 
@@ -124,3 +122,4 @@ int crypto_pwhash_str_needs_rehash (
 
 enum crypto_pwhash_PRIMITIVE = "argon2i";
 const(char)* crypto_pwhash_primitive ();
+

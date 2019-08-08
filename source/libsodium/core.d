@@ -10,7 +10,8 @@ module libsodium.core;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
+
 extern (C):
 
 int sodium_init ();
@@ -20,3 +21,4 @@ int sodium_init ();
 int sodium_set_misuse_handler (void function () handler);
 
 void sodium_misuse ();
+

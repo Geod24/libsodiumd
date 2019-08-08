@@ -10,8 +10,7 @@ module libsodium.crypto_scalarmult;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_scalarmult_curve25519;
+import libsodium;
 
 extern (C):
 
@@ -27,7 +26,7 @@ const(char)* crypto_scalarmult_primitive ();
 int crypto_scalarmult_base (ubyte* q, const(ubyte)* n);
 
 /*
- * NOTE: Do not use the result of this function directly.
+ * NOTE: Do not use the result of this function directly for key exchange.
  *
  * Hash the result with the public keys in order to compute a shared
  * secret key: H(q || client_pk || server_pk)
@@ -35,3 +34,4 @@ int crypto_scalarmult_base (ubyte* q, const(ubyte)* n);
  * Or unless this is not an option, use the crypto_kx() API instead.
  */
 int crypto_scalarmult (ubyte* q, const(ubyte)* n, const(ubyte)* p);
+

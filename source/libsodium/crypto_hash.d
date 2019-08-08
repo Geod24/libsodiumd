@@ -10,8 +10,7 @@ module libsodium.crypto_hash;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_hash_sha512;
+import libsodium;
 
 extern (C):
 
@@ -29,3 +28,4 @@ int crypto_hash (ubyte* out_, const(ubyte)* in_, ulong inlen);
 
 enum crypto_hash_PRIMITIVE = "sha512";
 const(char)* crypto_hash_primitive ();
+

@@ -10,7 +10,7 @@ module libsodium.utils;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -160,3 +160,4 @@ int sodium_unpad (
 /* -------- */
 
 int _sodium_alloc_init ();
+

@@ -10,7 +10,7 @@ module libsodium.crypto_generichash_blake2b;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -89,3 +89,4 @@ int crypto_generichash_blake2b_final (
 
 void crypto_generichash_blake2b_keygen (
     ref ubyte[crypto_generichash_blake2b_KEYBYTES] k);
+

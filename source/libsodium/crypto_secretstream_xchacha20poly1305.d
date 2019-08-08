@@ -10,9 +10,7 @@ module libsodium.crypto_secretstream_xchacha20poly1305;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_aead_xchacha20poly1305;
-import libsodium.crypto_stream_chacha20;
+import libsodium;
 
 extern (C):
 
@@ -84,3 +82,4 @@ int crypto_secretstream_xchacha20poly1305_pull (
 
 void crypto_secretstream_xchacha20poly1305_rekey (
     crypto_secretstream_xchacha20poly1305_state* state);
+

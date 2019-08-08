@@ -10,8 +10,7 @@ module libsodium.crypto_secretbox;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_secretbox_xsalsa20poly1305;
+import libsodium;
 
 extern (C):
 
@@ -83,3 +82,4 @@ int crypto_secretbox_open (
     ulong clen,
     const(ubyte)* n,
     const(ubyte)* k);
+

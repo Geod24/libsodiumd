@@ -10,7 +10,8 @@ module libsodium.crypto_pwhash_argon2id;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
+
 import core.stdc.stdint;
 
 extern (C):
@@ -95,3 +96,4 @@ int crypto_pwhash_argon2id_str_needs_rehash (
     ref const(char)[crypto_pwhash_argon2id_STRBYTES] str,
     ulong opslimit,
     size_t memlimit);
+

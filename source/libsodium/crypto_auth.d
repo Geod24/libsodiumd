@@ -10,8 +10,7 @@ module libsodium.crypto_auth;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_auth_hmacsha512256;
+import libsodium;
 
 extern (C):
 
@@ -33,3 +32,4 @@ int crypto_auth_verify (
     const(ubyte)* k);
 
 void crypto_auth_keygen (ref ubyte[crypto_auth_KEYBYTES] k);
+

@@ -10,7 +10,7 @@ module libsodium.crypto_core_ed25519;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -19,6 +19,9 @@ size_t crypto_core_ed25519_bytes ();
 
 enum crypto_core_ed25519_UNIFORMBYTES = 32;
 size_t crypto_core_ed25519_uniformbytes ();
+
+enum crypto_core_ed25519_HASHBYTES = 64;
+size_t crypto_core_ed25519_hashbytes ();
 
 enum crypto_core_ed25519_SCALARBYTES = 32;
 size_t crypto_core_ed25519_scalarbytes ();
@@ -33,6 +36,10 @@ int crypto_core_ed25519_add (ubyte* r, const(ubyte)* p, const(ubyte)* q);
 int crypto_core_ed25519_sub (ubyte* r, const(ubyte)* p, const(ubyte)* q);
 
 int crypto_core_ed25519_from_uniform (ubyte* p, const(ubyte)* r);
+
+int crypto_core_ed25519_from_hash (ubyte* p, const(ubyte)* h);
+
+void crypto_core_ed25519_random (ubyte* p);
 
 void crypto_core_ed25519_scalar_random (ubyte* r);
 
@@ -52,8 +59,14 @@ void crypto_core_ed25519_scalar_sub (
     const(ubyte)* x,
     const(ubyte)* y);
 
+void crypto_core_ed25519_scalar_mul (
+    ubyte* z,
+    const(ubyte)* x,
+    const(ubyte)* y);
+
 /*
  * The interval `s` is sampled from should be at least 317 bits to ensure almost
  * uniformity of `r` over `L`.
  */
 void crypto_core_ed25519_scalar_reduce (ubyte* r, const(ubyte)* s);
+

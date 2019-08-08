@@ -10,8 +10,7 @@ module libsodium.crypto_kdf;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_kdf_blake2b;
+import libsodium;
 
 extern (C):
 
@@ -38,3 +37,4 @@ int crypto_kdf_derive_from_key (
     ref const(ubyte)[crypto_kdf_KEYBYTES] key);
 
 void crypto_kdf_keygen (ref ubyte[crypto_kdf_KEYBYTES] k);
+

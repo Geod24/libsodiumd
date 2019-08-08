@@ -10,9 +10,9 @@ module libsodium.randombytes_sysrandom;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.randombytes;
+import libsodium;
 
 extern (C):
 
 extern __gshared randombytes_implementation randombytes_sysrandom_implementation;
+

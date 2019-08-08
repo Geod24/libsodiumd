@@ -10,7 +10,7 @@ module libsodium.crypto_kx;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -51,3 +51,4 @@ int crypto_kx_server_session_keys (
     ref const(ubyte)[crypto_kx_PUBLICKEYBYTES] server_pk,
     ref const(ubyte)[crypto_kx_SECRETKEYBYTES] server_sk,
     ref const(ubyte)[crypto_kx_PUBLICKEYBYTES] client_pk);
+

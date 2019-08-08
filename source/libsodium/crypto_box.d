@@ -10,8 +10,7 @@ module libsodium.crypto_box;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_box_curve25519xsalsa20poly1305;
+import libsodium;
 
 extern (C):
 
@@ -169,3 +168,4 @@ int crypto_box_open_afternm (
     ulong clen,
     const(ubyte)* n,
     const(ubyte)* k);
+

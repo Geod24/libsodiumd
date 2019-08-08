@@ -10,7 +10,7 @@ module libsodium.crypto_scalarmult_ed25519;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -21,7 +21,7 @@ enum crypto_scalarmult_ed25519_SCALARBYTES = 32U;
 size_t crypto_scalarmult_ed25519_scalarbytes ();
 
 /*
- * NOTE: Do not use the result of this function directly.
+ * NOTE: Do not use the result of this function directly for key exchange.
  *
  * Hash the result with the public keys in order to compute a shared
  * secret key: H(q || client_pk || server_pk)
@@ -38,3 +38,4 @@ int crypto_scalarmult_ed25519_noclamp (
 int crypto_scalarmult_ed25519_base (ubyte* q, const(ubyte)* n);
 
 int crypto_scalarmult_ed25519_base_noclamp (ubyte* q, const(ubyte)* n);
+

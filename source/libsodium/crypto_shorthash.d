@@ -10,8 +10,7 @@ module libsodium.crypto_shorthash;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_shorthash_siphash24;
+import libsodium;
 
 extern (C):
 
@@ -31,3 +30,4 @@ int crypto_shorthash (
     const(ubyte)* k);
 
 void crypto_shorthash_keygen (ref ubyte[crypto_shorthash_KEYBYTES] k);
+

@@ -10,7 +10,7 @@ module libsodium.crypto_stream_chacha20;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -97,3 +97,4 @@ void crypto_stream_chacha20_ietf_keygen (
 enum crypto_stream_chacha20_IETF_KEYBYTES = crypto_stream_chacha20_ietf_KEYBYTES;
 enum crypto_stream_chacha20_IETF_NONCEBYTES = crypto_stream_chacha20_ietf_NONCEBYTES;
 enum crypto_stream_chacha20_IETF_MESSAGEBYTES_MAX = crypto_stream_chacha20_ietf_MESSAGEBYTES_MAX;
+

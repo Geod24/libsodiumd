@@ -10,8 +10,7 @@ module libsodium.crypto_sign_ed25519;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_hash_sha512;
+import libsodium;
 
 extern (C):
 
@@ -97,3 +96,4 @@ int crypto_sign_ed25519ph_final_verify (
     crypto_sign_ed25519ph_state* state,
     const(ubyte)* sig,
     const(ubyte)* pk);
+

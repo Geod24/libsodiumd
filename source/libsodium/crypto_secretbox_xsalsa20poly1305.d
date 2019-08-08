@@ -10,8 +10,7 @@ module libsodium.crypto_secretbox_xsalsa20poly1305;
 
 @nogc nothrow:
 
-import libsodium.export_;
-import libsodium.crypto_stream_xsalsa20;
+import libsodium;
 
 extern (C):
 
@@ -52,3 +51,4 @@ size_t crypto_secretbox_xsalsa20poly1305_boxzerobytes ();
 
 enum crypto_secretbox_xsalsa20poly1305_ZEROBYTES = crypto_secretbox_xsalsa20poly1305_BOXZEROBYTES + crypto_secretbox_xsalsa20poly1305_MACBYTES;
 size_t crypto_secretbox_xsalsa20poly1305_zerobytes ();
+

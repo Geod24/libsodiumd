@@ -10,7 +10,7 @@ module libsodium.crypto_aead_xchacha20poly1305;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -84,3 +84,4 @@ enum crypto_aead_xchacha20poly1305_IETF_NSECBYTES = crypto_aead_xchacha20poly130
 enum crypto_aead_xchacha20poly1305_IETF_NPUBBYTES = crypto_aead_xchacha20poly1305_ietf_NPUBBYTES;
 enum crypto_aead_xchacha20poly1305_IETF_ABYTES = crypto_aead_xchacha20poly1305_ietf_ABYTES;
 enum crypto_aead_xchacha20poly1305_IETF_MESSAGEBYTES_MAX = crypto_aead_xchacha20poly1305_ietf_MESSAGEBYTES_MAX;
+

@@ -10,7 +10,7 @@ module libsodium.crypto_stream_xsalsa20;
 
 @nogc nothrow:
 
-import libsodium.export_;
+import libsodium;
 
 extern (C):
 
@@ -54,3 +54,4 @@ int crypto_stream_xsalsa20_xor_ic (
 
 void crypto_stream_xsalsa20_keygen (
     ref ubyte[crypto_stream_xsalsa20_KEYBYTES] k);
+
