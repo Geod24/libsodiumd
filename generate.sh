@@ -2,6 +2,13 @@
 
 set -e
 
+if [ "$#" -eq 4 ]
+then
+    echo "Wrong arguments number"
+    echo "Usage: $0 DSTEP_BINARY LIPSODIUM_REPO LIBSODIUMD_PACKAGE"
+    exit 1
+fi
+
 DSTEP=$1
 SRCDIR=$2
 export LIBSODIUMD=$3/source/libsodium/
