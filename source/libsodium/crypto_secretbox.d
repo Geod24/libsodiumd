@@ -59,7 +59,21 @@ int crypto_secretbox_open_detached (
     const(ubyte)* n,
     const(ubyte)* k);
 
-void crypto_secretbox_keygen (ref ubyte[crypto_secretbox_KEYBYTES] k);
+/**
+ * Generate a random keypair to use with `crypto_secretbox_*` functions
+ *
+ * This function just wraps a call to `randombytes_buf`
+ * It was introduced in v1.0.10, which is older than the Travis-CI package
+ * For ease of use, a D implementation is provided.
+ *
+ * See_Also:
+ *   https://github.com/jedisct1/libsodium/blob/1.0.17/src/libsodium/crypto_secretbox/crypto_secretbox.c#L63-L67
+ */
+extern(D) void crypto_secretbox_keygen (ref ubyte[crypto_secretbox_KEYBYTES] k)
+{
+    import libsodium.randombytes;
+    randombytes_buf(k.ptr, crypto_secretbox_KEYBYTES);
+}
 
 /* -- NaCl compatibility interface ; Requires padding -- */
 

@@ -51,7 +51,7 @@ size_t crypto_aead_aes256gcm_abytes ();
 enum crypto_aead_aes256gcm_MESSAGEBYTES_MAX = SODIUM_MIN(SODIUM_SIZE_MAX - crypto_aead_aes256gcm_ABYTES, 16UL * ((1UL << 32) - 2UL));
 size_t crypto_aead_aes256gcm_messagebytes_max ();
 
-struct crypto_aead_aes256gcm_state_
+align(16) struct crypto_aead_aes256gcm_state_
 {
     ubyte[512] opaque;
 }

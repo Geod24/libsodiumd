@@ -14,7 +14,7 @@ import libsodium;
 
 extern (C):
 
-struct crypto_generichash_blake2b_state
+align(64) struct crypto_generichash_blake2b_state
 {
     ubyte[384] opaque;
 }
