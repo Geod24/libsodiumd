@@ -4,8 +4,11 @@ set -ex
 
 DSTEP=$1
 SRCDIR=$2
-LIBSODIUMD=$3/source/libsodium/
+LIBSODIUMD=$3/source/libsodium
 export LIBSODIUMD
+
+# Remove all previous files
+rm -rf ${LIBSODIUMD}/*
 
 # Generate D files from C headers
 find "$SRCDIR/src/libsodium/include" -maxdepth 2 -xtype f -name '*.h' \
