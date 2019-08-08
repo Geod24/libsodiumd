@@ -4,8 +4,7 @@ set -e
 
 DSTEP=$1
 SRCDIR=$2
-LIBSODIUMD=$3/source/libsodium
-export LIBSODIUMD
+export LIBSODIUMD=$3/source/libsodium/
 
 # Remove all previous files
 rm -rf ${LIBSODIUMD}/*.d
