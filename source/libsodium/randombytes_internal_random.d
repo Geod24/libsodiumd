@@ -1,12 +1,12 @@
 /*******************************************************************************
 
-    D language bindings for libsodium's randombytes_salsa20_random.h
+    D language bindings for libsodium's randombytes_internal_random.h
 
     License: ISC (see LICENSE.txt)
 
 *******************************************************************************/
 
-module libsodium.randombytes_salsa20_random;
+module libsodium.randombytes_internal_random;
 
 @nogc nothrow:
 
@@ -15,4 +15,4 @@ import libsodium.randombytes;
 
 extern (C):
 
-extern __gshared randombytes_implementation randombytes_salsa20_implementation;
+extern __gshared randombytes_implementation randombytes_internal_implementation;
