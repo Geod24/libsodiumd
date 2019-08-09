@@ -27,7 +27,7 @@ const(char)* crypto_scalarmult_primitive ();
 int crypto_scalarmult_base (ubyte* q, const(ubyte)* n);
 
 /*
- * NOTE: Do not use the result of this function directly.
+ * NOTE: Do not use the result of this function directly for key exchange.
  *
  * Hash the result with the public keys in order to compute a shared
  * secret key: H(q || client_pk || server_pk)

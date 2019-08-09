@@ -20,6 +20,9 @@ size_t crypto_core_ed25519_bytes ();
 enum crypto_core_ed25519_UNIFORMBYTES = 32;
 size_t crypto_core_ed25519_uniformbytes ();
 
+enum crypto_core_ed25519_HASHBYTES = 64;
+size_t crypto_core_ed25519_hashbytes ();
+
 enum crypto_core_ed25519_SCALARBYTES = 32;
 size_t crypto_core_ed25519_scalarbytes ();
 
@@ -33,6 +36,10 @@ int crypto_core_ed25519_add (ubyte* r, const(ubyte)* p, const(ubyte)* q);
 int crypto_core_ed25519_sub (ubyte* r, const(ubyte)* p, const(ubyte)* q);
 
 int crypto_core_ed25519_from_uniform (ubyte* p, const(ubyte)* r);
+
+int crypto_core_ed25519_from_hash (ubyte* p, const(ubyte)* h);
+
+void crypto_core_ed25519_random (ubyte* p);
 
 void crypto_core_ed25519_scalar_random (ubyte* r);
 
@@ -48,6 +55,11 @@ void crypto_core_ed25519_scalar_add (
     const(ubyte)* y);
 
 void crypto_core_ed25519_scalar_sub (
+    ubyte* z,
+    const(ubyte)* x,
+    const(ubyte)* y);
+
+void crypto_core_ed25519_scalar_mul (
     ubyte* z,
     const(ubyte)* x,
     const(ubyte)* y);
