@@ -1,0 +1,49 @@
+# Test libsodiumd on all three platforms
+name: Test
+
+on: [pull_request, push]
+
+jobs:
+  main:
+    name: Run
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-18.04, macOS-10.15, windows-2019 ]
+        # DMD < 2.087.1 does not work on Mac OSX Catalina (10.15) because druntime used
+        # a private symbol, hence this is the minimum required version
+        # However, while compiling with DMD 2.087.1 works on Catalina,
+        # the distributed binary was not built with it until 2.090.0
+        dc: [ dmd-master, ldc-master, dmd-latest, ldc-latest, dmd-2.090.0, ldc-1.17.0 ]
+        exclude:
+          # Not supported yet
+          - os: windows-2019
+
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+
+    # Checkout this repository
+    - uses: actions/checkout@v2
+    # Install the D compiler
+    - name: Prepare compiler
+      uses: mihails-strasuns/setup-dlang@v0.5.0
+      with:
+          compiler: ${{ matrix.dc }}
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+
+    # Install os-specific packages
+    - name: '[Posix] Install dependencies'
+      if: runner.os == 'macOS' || runner.os == 'Linux'
+      run: |
+        if [ '${{ runner.os }}' == 'macOS' ]; then
+          brew install pkg-config libsodium
+        elif [ '${{ runner.os }}' == 'Linux' ]; then
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+          sudo apt-get update
+          sudo apt-get install libsodium-dev
+        fi
+
+    # Build and run the tests
+    - name: Build & test
+      run: dub test --compiler=${DC}
