@@ -70,7 +70,12 @@ jobs:
         if ((Get-FileHash '${{ github.workspace }}\lib\libsodium.zip' -Algorithm "SHA256").Hash -ne $sha256hash) {
           exit 1
         }
-        Expand-Archive '${{ github.workspace }}\lib\libsodium.zip' -DestinationPath ${{ github.workspace }}\lib\
+        Expand-Archive '${{ github.workspace }}\lib\libsodium.zip' -DestinationPath '${{ github.workspace }}\lib\'
+
+    # Need to be its own step because we execute either the restore cache step or the download libsodium step
+    - name: '[Windows] Setup LIB variable'
+      if: runner.os == 'Windows'
+      run: |
         echo "::set-env name=LIB::${{ github.workspace }}\lib\libsodium\x64\Release\v142\static\;$LIB"
 
     # Build and run the tests
