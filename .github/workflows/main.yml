@@ -16,8 +16,11 @@ jobs:
         # the distributed binary was not built with it until 2.090.0
         dc: [ dmd-master, ldc-master, dmd-latest, ldc-latest, dmd-2.090.0, ldc-1.17.0 ]
         exclude:
-          # Not supported yet
-          - os: windows-2019
+          # https://github.com/dlang/dub/issues/1914
+          # https://github.com/dlang/dub/issues/1915
+          - { os: windows-2019, dc: dmd-master }
+          - { os: windows-2019, dc: dmd-latest }
+          - { os: windows-2019, dc: dmd-2.090.0 }
 
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
@@ -44,6 +47,40 @@ jobs:
           sudo apt-get install libsodium-dev
         fi
 
+    - name: '[Windows] Load libsodium from cache'
+      id: cache-libsodium
+      if: runner.os == 'Windows'
+      uses: actions/cache@v1
+      with:
+        path: ${{ github.workspace }}\lib\libsodium\x64\Release\v142\static\
+        key: libsodium-1.0.18
+
+    - name: '[Windows] Install dependencies'
+      if: runner.os == 'Windows' && steps.cache-libsodium.outputs.cache-hit != 'true'
+      run: |
+        # TODO: Read the version from the base ref
+        $url = "https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18-msvc.zip"
+        $sha256hash = "C1D48D85C9361E350931FFE5067559CD7405A697C655D26955FB568D1084A5F4"
+        Write-Host ('Downloading {0} ...' -f $url)
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        # See https://github.com/PowerShell/PowerShell/issues/2138
+        $ProgressPreference = 'SilentlyContinue'
+        New-Item -ItemType directory -Path ${{ github.workspace }}\lib\
+        Invoke-WebRequest -Uri $url -OutFile '${{ github.workspace }}\lib\libsodium.zip'
+        if ((Get-FileHash '${{ github.workspace }}\lib\libsodium.zip' -Algorithm "SHA256").Hash -ne $sha256hash) {
+          exit 1
+        }
+        Expand-Archive '${{ github.workspace }}\lib\libsodium.zip' -DestinationPath ${{ github.workspace }}\lib\
+        echo "::set-env name=LIB::${{ github.workspace }}\lib\libsodium\x64\Release\v142\static\;$LIB"
+
     # Build and run the tests
-    - name: Build & test
-      run: dub test --compiler=${DC}
+    - name: '[POSIX] Build & test'
+      if: runner.os != 'Windows'
+      run:  dub test --compiler=${{ env.DC }}
+
+    - name: '[Windows] Build & test'
+      if: runner.os == 'Windows'
+      shell: cmd
+      run: |
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        dub test -v --compiler=${{ env.DC }}
