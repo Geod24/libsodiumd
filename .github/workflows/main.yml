@@ -30,10 +30,9 @@ jobs:
     - uses: actions/checkout@v2
     # Install the D compiler
     - name: Prepare compiler
-      uses: mihails-strasuns/setup-dlang@v0.5.0
+      uses: mihails-strasuns/setup-dlang@v1
       with:
           compiler: ${{ matrix.dc }}
-          gh_token: ${{ secrets.GITHUB_TOKEN }}
 
     # Install os-specific packages
     - name: '[Posix] Install dependencies'
@@ -72,12 +71,6 @@ jobs:
         }
         Expand-Archive '${{ github.workspace }}\lib\libsodium.zip' -DestinationPath '${{ github.workspace }}\lib\'
 
-    # Need to be its own step because we execute either the restore cache step or the download libsodium step
-    - name: '[Windows] Setup LIB variable'
-      if: runner.os == 'Windows'
-      run: |
-        echo "::set-env name=LIB::${{ github.workspace }}\lib\libsodium\x64\Release\v142\static\;$LIB"
-
     # Build and run the tests
     - name: '[POSIX] Build & test'
       if: runner.os != 'Windows'
@@ -86,6 +79,14 @@ jobs:
     - name: '[Windows] Build & test'
       if: runner.os == 'Windows'
       shell: cmd
+      env:
+         LIB: ${{ github.workspace }}\lib\libsodium\x64\Release\v142\static\;$LIB
       run: |
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-        dub test -v --compiler=${{ env.DC }}
+        dub test --compiler=${{ env.DC }}
+        if %errorlevel% neq 0 exit /b %errorlevel%
+
+    - name: 'Upload code coverage'
+      uses: codecov/codecov-action@v1
+      with:
+        flags: unittests
