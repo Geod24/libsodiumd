@@ -1,8 +1,8 @@
 {
-	"name": "libsodiumd",
-	"description": "D binding for libsodium",
-	"license": "ISC",
-	"authors": [ "Mathias 'Geod24' Lang" ],
+    "name": "libsodiumd",
+    "description": "D binding for libsodium",
+    "license": "ISC",
+    "authors": [ "Mathias 'Geod24' Lang" ],
 
     "libs-posix": [ "sodium" ],
     "libs-windows": [ "libsodium" ]
