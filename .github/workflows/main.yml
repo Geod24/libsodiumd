@@ -15,12 +15,12 @@ jobs:
         # However, while compiling with DMD 2.087.1 works on Catalina,
         # the distributed binary was not built with it until 2.090.0
         dc: [ dmd-master, ldc-master, dmd-latest, ldc-latest, dmd-2.090.0, ldc-1.17.0 ]
-        exclude:
+        #exclude:
           # https://github.com/dlang/dub/issues/1914
           # https://github.com/dlang/dub/issues/1915
-          - { os: windows-2019, dc: dmd-master }
-          - { os: windows-2019, dc: dmd-latest }
-          - { os: windows-2019, dc: dmd-2.090.0 }
+          #- { os: windows-2019, dc: dmd-master }
+          #- { os: windows-2019, dc: dmd-latest }
+          #- { os: windows-2019, dc: dmd-2.090.0 }
 
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
